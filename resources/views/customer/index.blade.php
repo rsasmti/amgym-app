@@ -3,7 +3,7 @@
 
 @section('button_nav')
 
-|| B2B CAPACITY FORECAST || &nbsp;&nbsp;
+|| Data Pelanggan || &nbsp;&nbsp;
 <button type="button" id="addBtn" class=" btn btn-light btn-outline-primary"><i class="bi bi-plus-circle"></i>&nbsp;Add New</button>
 &nbsp;
 
@@ -81,13 +81,13 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             columns: [{
                     data: 'action',
                     name: 'action',
-                    // searchable: false,
-                    // orderable: false
+                    searchable: false,
+                    orderable: false
                 },
                 {
                     data: 'id',
                     name: 'id',
-                    // visible: false,
+                    visible: false,
                 },
                 {
                     data: 'name',
@@ -159,7 +159,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
     // Tombol tambah data
     $('#addBtn').click(function() {
         $(document).find('span.error-text').text('');
-        $('#modal-title').html("Form Forecast Order (submit new forecast)");
+        $('#modal-title').html("Form submit new data");
         $('#id').val('');
         $('#form-modal_add_edit_show').trigger("reset");
         $('#saveBtn').show();
@@ -171,7 +171,6 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
     // Tombol simpan data
     $('#saveBtn').click(function(e) {
         e.preventDefault();
-        $('#bandwidth').inputmask('remove');
         saveData()
     });
 
@@ -199,13 +198,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                         title: 'Oops...',
                         text: 'Make sure all the required data is filled in, check again!',
                     })
-                    $('#bandwidth').inputmask({
-                        alias: 'currency',
-                        prefix: '',
-                        radixPoint: '.',
-                        digits: 0,
-                        rightAlign: false
-                    });
+
                 } else {
                     $('#form-modal_add_edit_show')[0].reset();
                     $('#form-modal_add_edit_show').trigger("reset");
@@ -234,32 +227,37 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
 
     // Tombol edit data
     $('body').on('click', '.editData', function() {
-        $('#bandwidth').inputmask({
-            alias: 'currency',
-            prefix: '',
-            radixPoint: '.',
-            digits: 0,
-            rightAlign: false
-        });
-
         $(document).find('span.error-text').text('');
-        $("#form-modal_add_edit_show :input").prop("disabled", true);
-        $(".divId :input").prop("disabled", false);
         var id = $(this).data('id');
-
-        $('.divInputFileSubmitter').hide();
-        $('.divShowFileSubmitter').show();
-
-        $('.divManagementEscalation').hide();
+        $('#saveBtn').show();
 
         $.get("{{ route('customers.index') }}" + "/" + id + "/edit", function(data) {
-            $('#modal-title').html("Form Forecast Order (edit data)");
+            $('#modal-title').html("Form edit data");
             $('#id').val(data.id);
-            $('#id_forecast').val(data.id_forecast);
-            $('#customer_name').val(data.customer_name);
-            $('#bandwidth').val(data.bandwidth);
-            $('#transport').val(data.transport);
-            $('#order_type').val(data.order_type);
+            $('#name').val(data.name);
+            $('#address').val(data.address);
+            $('#gender').val(data.gender);
+            $('#email').val(data.email);
+            $('#hp').val(data.hp);
+
+            $('#modal_add_edit_show').modal('show');
+        })
+
+    });
+
+    $('body').on('click', '.showData', function() {
+        $(document).find('span.error-text').text('');
+        var id = $(this).data('id');
+        $('#saveBtn').hide();
+
+        $.get("{{ route('customers.index') }}" + "/" + id + "/edit", function(data) {
+            $('#modal-title').html("Form edit data");
+            $('#id').val(data.id);
+            $('#name').val(data.name);
+            $('#address').val(data.address);
+            $('#gender').val(data.gender);
+            $('#email').val(data.email);
+            $('#hp').val(data.hp);
 
             $('#modal_add_edit_show').modal('show');
         })
@@ -281,6 +279,48 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             $('#bandwidth').val(data.bandwidth);
 
             $('#modal_add_edit_show').modal('show');
+        })
+
+    });
+
+    $('body').on('click', '.deleteData', function() {
+        var id = $(this).data("id");
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ route('customers.store') }}" + '/' + id,
+                    success: function(data) {
+                        $('#datatable').DataTable().ajax.reload();
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                    }
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire(
+                    'Cancelled',
+                    'Your file is safe :)',
+                    'error'
+                )
+            }
         })
 
     });

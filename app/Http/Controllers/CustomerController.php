@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use DataTables;
+use Validator;
 use DB;
 
 
@@ -56,7 +57,42 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->id == null) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'address' => 'required',
+                'gender' => 'required',
+                'email' => 'required',
+                'hp' => 'required',
+            ]);
+        }
+        if ($request->id != null) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'address' => 'required',
+                'gender' => 'required',
+                'email' => 'required',
+                'hp' => 'required',
+            ]);
+        }
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        } else {
+            Customer::updateOrCreate(
+                ['id' => $request->id],
+                [
+                    'name' => $request->name,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'email' => $request->email,
+                    'hp' => $request->hp,
+                ]
+            );
+            $save = true;
+            if ($save) {
+                return response()->json(['status' => 1,]);
+            }
+        }
     }
 
     /**
@@ -76,9 +112,10 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Customer $customer)
+    public function edit($id)
     {
-        //
+        $data = Customer::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -99,8 +136,8 @@ class CustomerController extends Controller
      * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        Customer::find($id)->delete();
     }
 }

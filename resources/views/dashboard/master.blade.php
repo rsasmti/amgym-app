@@ -10,7 +10,7 @@
     <div class="wrapper">
 
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ URL::to('/images') }}/indosatooredoohutchison_logo.svg" alt="AdminLTELogo" height=25% width=25%>
+            <img class="animation__shake" src="{{ URL::to('/images') }}/amgym.png" alt="AdminLTELogo" height=25% width=25%>
         </div>
 
         @include('dashboard.navbar')
