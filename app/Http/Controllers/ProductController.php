@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use DataTables;
 use Validator;
 use DB;
 
 
-class CustomerController extends Controller
+class ProductController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
 
-            $data = DB::table('customers');
-            $data->orderBy('customers.updated_at', 'DESC');
+            $data = DB::table('products');
+            $data->orderBy('products.updated_at', 'DESC');
 
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -31,40 +31,34 @@ class CustomerController extends Controller
                 ->make(true);
         }
 
-        return view('customer.index');
+        return view('product.index');
     }
 
     public function store(Request $request)
     {
         if ($request->id == null) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'address' => 'required',
-                'gender' => 'required',
-                'email' => 'required',
-                'hp' => 'required',
+                'jenis_product' => 'required',
+                'tipe_product' => 'required',
+                'price' => 'required',
             ]);
         }
         if ($request->id != null) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                'address' => 'required',
-                'gender' => 'required',
-                'email' => 'required',
-                'hp' => 'required',
+                'jenis_product' => 'required',
+                'tipe_product' => 'required',
+                'price' => 'required',
             ]);
         }
         if (!$validator->passes()) {
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            Customer::updateOrCreate(
+            Product::updateOrCreate(
                 ['id' => $request->id],
                 [
-                    'name' => $request->name,
-                    'address' => $request->address,
-                    'gender' => $request->gender,
-                    'email' => $request->email,
-                    'hp' => $request->hp,
+                    'jenis_product' => $request->jenis_product,
+                    'tipe_product' => $request->tipe_product,
+                    'price' => $request->price,
                 ]
             );
             $save = true;
@@ -76,12 +70,12 @@ class CustomerController extends Controller
 
     public function edit($id)
     {
-        $data = Customer::find($id);
+        $data = Product::find($id);
         return response()->json($data);
     }
 
     public function destroy($id)
     {
-        Customer::find($id)->delete();
+        Product::find($id)->delete();
     }
 }

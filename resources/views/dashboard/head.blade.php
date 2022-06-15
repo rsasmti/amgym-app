@@ -1,6 +1,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DBEST | @yield('title','Home')</title>
+    <title>AM-GYM | @yield('title','Home')</title>
     <link rel="icon" src="{{ URL::to('/images') }}/ioh-favicon.png" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}" />

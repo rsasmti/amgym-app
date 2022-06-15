@@ -17,46 +17,29 @@
                     <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="-">
-                                <label for="name">Name</label>
-                                <span class="text-danger error-text name_error"></span>
+                                <input type="text" class="form-control" id="jenis_product" name="jenis_product" placeholder="-">
+                                <label for="jenis_product">Jenis Product</label>
+                                <span class="text-danger error-text jenis_product_error"></span>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <select class="form-select" id="gender" name="gender">
+                                <select class="form-select" id="tipe_product" name="tipe_product">
                                     <option selected disabled>Choose...</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                    <option value="Harian">Harian</option>
+                                    <option value="Bulanan">Bulanan</option>
                                 </select>
-                                <label for="floatingSelectGrid">Gender</label>
-                                <span class="text-danger error-text gender_error"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row g-2 mt-2">
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="address" name="address" placeholder="-">
-                                <label for="address">Address</label>
-                                <span class="text-danger error-text address_error"></span>
+                                <label for="floatingSelectGrid">Tipe Product</label>
+                                <span class="text-danger error-text tipe_product_error"></span>
                             </div>
                         </div>
                     </div>
                     <div class="row g-2 mt-2">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="-">
-                                <label for="email">Email</label>
-                                <span class="text-danger error-text email_error"></span>
-                            </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="hp" name="hp" placeholder="-">
-                                <label for="hp">HP</label>
-                                <span class="text-danger error-text hp_error"></span>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="-">
+                                <label for="price">Harga</label>
+                                <span class="text-danger error-text price_error"></span>
                             </div>
                         </div>
                     </div>

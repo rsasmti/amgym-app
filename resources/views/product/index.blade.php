@@ -1,9 +1,9 @@
 @extends('dashboard.master')
-@section('title', 'Customer')
+@section('title', 'Product')
 
 @section('button_nav')
 
-|| Data Product || &nbsp;&nbsp;
+|| Data Produk || &nbsp;&nbsp;
 <button type="button" id="addBtn" class=" btn btn-light btn-outline-primary"><i class="bi bi-plus-circle"></i>&nbsp;Add New</button>
 &nbsp;
 
@@ -21,29 +21,25 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                 <tr>
                     <th>Action</th>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>HP</th>
+                    <th>Jenis Product</th>
+                    <th>Tipe Product</th>
+                    <th>Harga</th>
                 </tr>
             </thead>
             <tfoot class="bg-purple">
                 <tr>
                     <th>Action</th>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Gender</th>
-                    <th>Email</th>
-                    <th>HP</th>
+                    <th>Jenis Product</th>
+                    <th>Tipe Product</th>
+                    <th>Harga</th>
                 </tr>
             </tfoot>
         </table>
     </div>
 </div>
 
-@include('customer.modal_add_edit_show')
+@include('product.modal_add_edit_show')
 
 @endsection
 
@@ -72,7 +68,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('customers.index') }}",
+                url: "{{ route('products.index') }}",
                 data: function(req) {
                     // req.alldata = alldata;
                 }
@@ -90,25 +86,17 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                     visible: false,
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'jenis_product',
+                    name: 'jenis_product'
                 },
                 {
-                    data: 'address',
-                    name: 'address',
+                    data: 'tipe_product',
+                    name: 'tipe_product',
                 },
                 {
-                    data: 'gender',
-                    name: 'gender',
-                },
-                {
-                    data: 'email',
-                    name: 'email',
-                    // render: $.fn.dataTable.render.number(',', '.', 0, '')
-                },
-                {
-                    data: 'hp',
-                    name: 'hp'
+                    data: 'price',
+                    name: 'price',
+                    render: $.fn.dataTable.render.number(',', '.', 0, '')
                 },
             ],
             order: [
@@ -177,7 +165,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
     function saveData() {
         var formData = new FormData($("#form-modal_add_edit_show")[0]);
         $.ajax({
-            url: "{{ route('customers.store') }}",
+            url: "{{ route('products.store') }}",
             type: "POST",
             data: formData,
             dataType: 'json',
@@ -231,14 +219,12 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         var id = $(this).data('id');
         $('#saveBtn').show();
 
-        $.get("{{ route('customers.index') }}" + "/" + id + "/edit", function(data) {
+        $.get("{{ route('products.index') }}" + "/" + id + "/edit", function(data) {
             $('#modal-title').html("Form edit data");
             $('#id').val(data.id);
-            $('#name').val(data.name);
-            $('#address').val(data.address);
-            $('#gender').val(data.gender);
-            $('#email').val(data.email);
-            $('#hp').val(data.hp);
+            $('#jenis_product').val(data.jenis_product);
+            $('#tipe_product').val(data.tipe_product);
+            $('#price').val(data.price);
 
             $('#modal_add_edit_show').modal('show');
         })
@@ -250,19 +236,18 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         var id = $(this).data('id');
         $('#saveBtn').hide();
 
-        $.get("{{ route('customers.index') }}" + "/" + id + "/edit", function(data) {
+        $.get("{{ route('products.index') }}" + "/" + id + "/edit", function(data) {
             $('#modal-title').html("Form show data");
             $('#id').val(data.id);
-            $('#name').val(data.name);
-            $('#address').val(data.address);
-            $('#gender').val(data.gender);
-            $('#email').val(data.email);
-            $('#hp').val(data.hp);
+            $('#jenis_product').val(data.jenis_product);
+            $('#tipe_product').val(data.tipe_product);
+            $('#price').val(data.price);
 
             $('#modal_add_edit_show').modal('show');
         })
 
     });
+
 
 
     $('body').on('click', '.deleteData', function() {
@@ -280,7 +265,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('customers.store') }}" + '/' + id,
+                    url: "{{ route('products.store') }}" + '/' + id,
                     success: function(data) {
                         $('#datatable').DataTable().ajax.reload();
                     },
@@ -331,6 +316,5 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         border-left: green 2px solid;
         border-right: green 2px solid;
     }
-
 </style>
 @endsection

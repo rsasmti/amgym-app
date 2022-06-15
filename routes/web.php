@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -32,7 +33,9 @@ Route::middleware([
         return view('dashboard.home');
     });
 
-// CRUD Customer
-Route::resource('customers', CustomerController::class);
+    // CRUD Customer
+    Route::resource('customers', CustomerController::class);
 
+    // CRUD Customer
+    Route::resource('products', ProductController::class);
 });
