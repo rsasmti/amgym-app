@@ -3,7 +3,7 @@
 
 @section('button_nav')
 
-|| Data Product || &nbsp;&nbsp;
+|| Data Customer || &nbsp;&nbsp;
 <button type="button" id="addBtn" class=" btn btn-light btn-outline-primary"><i class="bi bi-plus-circle"></i>&nbsp;Add New</button>
 &nbsp;
 

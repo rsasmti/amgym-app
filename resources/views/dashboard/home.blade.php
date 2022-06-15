@@ -11,13 +11,13 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{{ URL::to('/images') }}/header-hero-banner-id.jpg" class="d-block w-100" alt="...">
+        <img src="{{ URL::to('/images') }}/amgymfoto1.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{{ URL::to('/images') }}/ondesksurvey.png" class="d-block w-100" alt="...">
+        <img src="{{ URL::to('/images') }}/amgymfoto2.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="{{ URL::to('/images') }}/Ryan_Dahl.png" class="d-block w-100" alt="...">
+        <img src="{{ URL::to('/images') }}/amgymfoto3.jpg" class="d-block w-100" alt="...">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -31,7 +31,7 @@
   </div>
 </section>
 <br>
+<!-- <br> -->
 <br>
-<br>
-<h1 style="text-align:center">"We Plan It, We Execute It, We Improve It."</h1>
+<h1 style="text-align:center">"Discipline is the bridge between your bodybuilding goals and bodybuilding success."</h1>
 @endsection
