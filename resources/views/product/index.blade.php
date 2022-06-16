@@ -19,7 +19,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         <table id="datatable" class="table table-bordered  border-light table-striped align-middle nowrap" style="width:100%">
             <thead class="bg-purple">
                 <tr>
-                    <th>Action</th>
+                    <td>Action</td>
                     <th>Id</th>
                     <th>Nama Product</th>
                     <th>Tipe Product</th>
@@ -28,7 +28,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             </thead>
             <tfoot class="bg-purple">
                 <tr>
-                    <th>Action</th>
+                    <td>Action</td>
                     <th>Id</th>
                     <th>Nama Product</th>
                     <th>Tipe Product</th>

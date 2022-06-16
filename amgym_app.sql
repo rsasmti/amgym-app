@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2022 at 06:05 PM
+-- Generation Time: Jun 16, 2022 at 03:46 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -37,6 +37,13 @@ CREATE TABLE `customers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `address`, `gender`, `email`, `hp`, `created_at`, `updated_at`) VALUES
+(1, 'Ayu', 'Komp. Star Borneo Resident 4 Blok J No. 16', 'Female', 'rellysetyo@gmail.com', '+62811220705', '2022-06-16 06:39:00', '2022-06-16 06:39:00');
 
 -- --------------------------------------------------------
 
@@ -116,12 +123,22 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `jenis_product` varchar(254) DEFAULT NULL,
+  `nama_product` varchar(254) DEFAULT NULL,
   `tipe_product` varchar(254) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `nama_product`, `tipe_product`, `price`, `created_at`, `updated_at`) VALUES
+(1, 'Member Gym Pria', 'Bulanan', 275000, '2022-06-16 05:46:11', '2022-06-16 05:46:11'),
+(2, 'Harian Gym Pria', 'Harian', 45000, '2022-06-16 05:46:44', '2022-06-16 05:46:44'),
+(3, 'Member Gym Wanita', 'Bulanan', 150000, '2022-06-16 05:47:01', '2022-06-16 05:47:01'),
+(4, 'Harian Gym Wanita', 'Harian', 40000, '2022-06-16 05:47:31', '2022-06-16 05:49:57');
 
 -- --------------------------------------------------------
 
@@ -143,8 +160,31 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('EZscs0377GL5mBpk84jvDtWzzPCVp5NkKNoc3zbb', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiTFRmRWt1RnNSV043RTliNmtGUG9uM2VKOGR4UHBDV2hSdXhGR0trZyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jdXN0b21lcnMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGJiMGtwL0Y0TzlZNE1WUlR6YUYwVy41bnNEMjdxUlY1NEhlZUdIOXRjUElwMlE4QWlnTkNTIjt9', 1655309048),
-('nfz6S6Iio5Oo0IzXHl0WeJeWXxnvPs4ou32fcctg', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiY1IxS1dQbjZ5N0hRQ1hVM0FLejdnSlVqQW9sbjdXdWZyQkdQWkx6ayI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1655305498);
+('BP3xEIrQIXglIBWbad1ftyZ8HebPWjQULbl8PTrf', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR0dRRFdjMXkyelRmdUg3UHp2WEZQWTFQdWhuY3lPelpEbGIwc0c0diI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90cmFuc2FjdGlvbnMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGJiMGtwL0Y0TzlZNE1WUlR6YUYwVy41bnNEMjdxUlY1NEhlZUdIOXRjUElwMlE4QWlnTkNTIjt9', 1655387013);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL,
+  `transaction_date` date DEFAULT NULL,
+  `customer_name` varchar(254) DEFAULT NULL,
+  `nama_product` varchar(254) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `end_of_membership` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`id`, `transaction_date`, `customer_name`, `nama_product`, `price`, `end_of_membership`, `created_at`, `updated_at`) VALUES
+(3, '2022-06-16', 'Ayu', 'Member Gym Pria', 275000, '2022-07-15', '2022-06-16 06:42:48', '2022-06-16 06:42:48');
 
 -- --------------------------------------------------------
 
@@ -227,6 +267,12 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -241,7 +287,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -265,7 +311,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `transactions`
+--
+ALTER TABLE `transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
