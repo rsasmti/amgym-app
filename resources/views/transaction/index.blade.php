@@ -1,9 +1,9 @@
 @extends('dashboard.master')
-@section('title', 'Product')
+@section('title', 'Customer')
 
 @section('button_nav')
 
-|| Data Produk || &nbsp;&nbsp;
+|| Data Transaksi || &nbsp;&nbsp;
 <button type="button" id="addBtn" class=" btn btn-light btn-outline-primary"><i class="bi bi-plus-circle"></i>&nbsp;Add New</button>
 &nbsp;
 
@@ -21,25 +21,29 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                 <tr>
                     <th>Action</th>
                     <th>Id</th>
-                    <th>Nama Product</th>
-                    <th>Tipe Product</th>
+                    <th>Tanggal Transaksi</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Nama Produk</th>
                     <th>Harga</th>
+                    <th>Tanggal Berakhir Member</th>
                 </tr>
             </thead>
             <tfoot class="bg-purple">
                 <tr>
                     <th>Action</th>
                     <th>Id</th>
-                    <th>Nama Product</th>
-                    <th>Tipe Product</th>
+                    <th>Tanggal Transaksi</th>
+                    <th>Nama Pelanggan</th>
+                    <th>Nama Produk</th>
                     <th>Harga</th>
+                    <th>Tanggal Berakhir Member</th>
                 </tr>
             </tfoot>
         </table>
     </div>
 </div>
 
-@include('product.modal_add_edit_show')
+@include('transaction.modal_add_edit_show')
 
 @endsection
 
@@ -68,7 +72,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('products.index') }}",
+                url: "{{ route('transactions.index') }}",
                 data: function(req) {
                     // req.alldata = alldata;
                 }
@@ -86,17 +90,25 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                     visible: false,
                 },
                 {
-                    data: 'nama_product',
-                    name: 'nama_product'
+                    data: 'transaction_date',
+                    name: 'transaction_date'
                 },
                 {
-                    data: 'tipe_product',
-                    name: 'tipe_product',
+                    data: 'customer_name',
+                    name: 'customer_name'
+                },
+                {
+                    data: 'nama_product',
+                    name: 'nama_product',
                 },
                 {
                     data: 'price',
                     name: 'price',
-                    render: $.fn.dataTable.render.number(',', '.', 0, '')
+                },
+                {
+                    data: 'end_of_membership',
+                    name: 'end_of_membership',
+                    // render: $.fn.dataTable.render.number(',', '.', 0, '')
                 },
             ],
             order: [
@@ -165,7 +177,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
     function saveData() {
         var formData = new FormData($("#form-modal_add_edit_show")[0]);
         $.ajax({
-            url: "{{ route('products.store') }}",
+            url: "{{ route('transactions.store') }}",
             type: "POST",
             data: formData,
             dataType: 'json',
@@ -219,12 +231,14 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         var id = $(this).data('id');
         $('#saveBtn').show();
 
-        $.get("{{ route('products.index') }}" + "/" + id + "/edit", function(data) {
+        $.get("{{ route('transactions.index') }}" + "/" + id + "/edit", function(data) {
             $('#modal-title').html("Form edit data");
             $('#id').val(data.id);
+            $('#transaction_date').val(data.transaction_date);
+            $('#customer_name').val(data.customer_name);
             $('#nama_product').val(data.nama_product);
-            $('#tipe_product').val(data.tipe_product);
             $('#price').val(data.price);
+            $('#end_of_membership').val(data.end_of_membership);
 
             $('#modal_add_edit_show').modal('show');
         })
@@ -236,19 +250,37 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         var id = $(this).data('id');
         $('#saveBtn').hide();
 
-        $.get("{{ route('products.index') }}" + "/" + id + "/edit", function(data) {
+        $.get("{{ route('transactions.index') }}" + "/" + id + "/edit", function(data) {
             $('#modal-title').html("Form show data");
             $('#id').val(data.id);
+            $('#transaction_date').val(data.transaction_date);
+            $('#customer_name').val(data.customer_name);
             $('#nama_product').val(data.nama_product);
-            $('#tipe_product').val(data.tipe_product);
             $('#price').val(data.price);
+            $('#end_of_membership').val(data.end_of_membership);
 
             $('#modal_add_edit_show').modal('show');
         })
 
     });
 
-
+    $("#nama_product").on('change', function() {
+        let nama_product = $("#nama_product").val();
+        $.ajax({
+            url: "{{ route('products.harga') }}",
+            type: "get",
+            data: {
+                nama_product: nama_product
+            },
+            dataType: 'json',
+            success: function(data) {
+                $('#price').val(data.price);
+            },
+            error: function(data) {
+                console.log('Error:', data);
+            }
+        });
+    });
 
     $('body').on('click', '.deleteData', function() {
         var id = $(this).data("id");
@@ -265,7 +297,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('products.store') }}" + '/' + id,
+                    url: "{{ route('transactions.store') }}" + '/' + id,
                     success: function(data) {
                         $('#datatable').DataTable().ajax.reload();
                     },

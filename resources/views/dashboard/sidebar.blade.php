@@ -92,6 +92,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('transactions') }}" class="nav-link {{ 'transactions' == request()->segment(1) ? 'active' : '' }}" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt text-info"></i>
+                        <p>
+                            Transactions
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

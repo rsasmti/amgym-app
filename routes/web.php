@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 
 
 /*
@@ -36,6 +37,10 @@ Route::middleware([
     // CRUD Customer
     Route::resource('customers', CustomerController::class);
 
-    // CRUD Customer
+    // CRUD products
     Route::resource('products', ProductController::class);
+    Route::get('products/harga', [ProductController::class, 'harga'])->name('products.harga');
+
+    // CRUD transactions
+    Route::resource('transactions', TransactionController::class);
 });

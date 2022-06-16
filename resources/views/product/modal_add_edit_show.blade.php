@@ -17,9 +17,9 @@
                     <div class="row g-2">
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="jenis_product" name="jenis_product" placeholder="-">
-                                <label for="jenis_product">Jenis Product</label>
-                                <span class="text-danger error-text jenis_product_error"></span>
+                                <input type="text" class="form-control" id="nama_product" name="nama_product" placeholder="-">
+                                <label for="nama_product">Nama Product</label>
+                                <span class="text-danger error-text nama_product_error"></span>
                             </div>
                         </div>
                         <div class="col-md">
