@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PresenceController;
 
 
 /*
@@ -43,4 +44,9 @@ Route::middleware([
 
     // CRUD transactions
     Route::resource('transactions', TransactionController::class);
+
+    // CRUD presences
+    Route::resource('presences', PresenceController::class);
+    Route::post('presences/transactionsData', [PresenceController::class, 'transactionsData'])->name('presences.transactionsData');
+
 });

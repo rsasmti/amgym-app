@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2022 at 03:46 PM
+-- Generation Time: Jun 26, 2022 at 08:09 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -118,6 +118,30 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `presences`
+--
+
+CREATE TABLE `presences` (
+  `id` int(11) NOT NULL,
+  `presence_date` date DEFAULT NULL,
+  `customer_name` varchar(254) DEFAULT NULL,
+  `nama_product` varchar(254) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `end_of_membership` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `presences`
+--
+
+INSERT INTO `presences` (`id`, `presence_date`, `customer_name`, `nama_product`, `price`, `end_of_membership`, `created_at`, `updated_at`) VALUES
+(4, '2022-06-27', 'Ayu', 'Member Gym Pria', 275000, '2022-07-15', '2022-06-25 06:20:18', '2022-06-25 23:02:46');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -160,7 +184,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BP3xEIrQIXglIBWbad1ftyZ8HebPWjQULbl8PTrf', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiR0dRRFdjMXkyelRmdUg3UHp2WEZQWTFQdWhuY3lPelpEbGIwc0c0diI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC90cmFuc2FjdGlvbnMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGJiMGtwL0Y0TzlZNE1WUlR6YUYwVy41bnNEMjdxUlY1NEhlZUdIOXRjUElwMlE4QWlnTkNTIjt9', 1655387013);
+('hFvnhj1KTzUaVd3lOmAP8VdV5kzyG4dGMbjkzg5T', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoieTczenBXejBycEpuejVSS083YklVVWhEbWdHOG5nRzdwem5CSFBVUyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcmVzZW5jZXMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJGJiMGtwL0Y0TzlZNE1WUlR6YUYwVy41bnNEMjdxUlY1NEhlZUdIOXRjUElwMlE4QWlnTkNTIjt9', 1656223714);
 
 -- --------------------------------------------------------
 
@@ -253,6 +277,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `presences`
+--
+ALTER TABLE `presences`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -306,6 +336,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `presences`
+--
+ALTER TABLE `presences`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`

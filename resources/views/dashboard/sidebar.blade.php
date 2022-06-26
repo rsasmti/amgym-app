@@ -100,6 +100,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('presences') }}" class="nav-link {{ 'presences' == request()->segment(1) ? 'active' : '' }}" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt text-info"></i>
+                        <p>
+                            Presensi
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -1,9 +1,9 @@
 @extends('dashboard.master')
-@section('title', 'Transaksi')
+@section('title', 'Presensi')
 
 @section('button_nav')
 
-|| Data Transaksi || &nbsp;&nbsp;
+|| Data Presensi || &nbsp;&nbsp;
 <button type="button" id="addBtn" class=" btn btn-light btn-outline-primary"><i class="bi bi-plus-circle"></i>&nbsp;Add New</button>
 &nbsp;
 
@@ -21,7 +21,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                 <tr>
                     <td>Action</td>
                     <th>Id</th>
-                    <th>Tanggal Transaksi</th>
+                    <th>Tanggal Presensi</th>
                     <th>Nama Pelanggan</th>
                     <th>Nama Produk</th>
                     <th>Harga</th>
@@ -32,7 +32,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                 <tr>
                     <td>Action</td>
                     <th>Id</th>
-                    <th>Tanggal Transaksi</th>
+                    <th>Tanggal Presensi</th>
                     <th>Nama Pelanggan</th>
                     <th>Nama Produk</th>
                     <th>Harga</th>
@@ -43,7 +43,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
     </div>
 </div>
 
-@include('transaction.modal_add_edit_show')
+@include('presence.modal_add_edit_show')
 
 @endsection
 
@@ -65,14 +65,12 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             $(this).html('<input type="text" class="form-control" placeholder="' + title + '" />')
         });
 
-
-
         var table = $('#datatable').DataTable({
             scrollX: true,
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('transactions.index') }}",
+                url: "{{ route('presences.index') }}",
                 data: function(req) {
                     // req.alldata = alldata;
                 }
@@ -90,8 +88,8 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
                     visible: false,
                 },
                 {
-                    data: 'transaction_date',
-                    name: 'transaction_date'
+                    data: 'presence_date',
+                    name: 'presence_date'
                 },
                 {
                     data: 'customer_name',
@@ -177,7 +175,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
     function saveData() {
         var formData = new FormData($("#form-modal_add_edit_show")[0]);
         $.ajax({
-            url: "{{ route('transactions.store') }}",
+            url: "{{ route('presences.store') }}",
             type: "POST",
             data: formData,
             dataType: 'json',
@@ -231,10 +229,10 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         var id = $(this).data('id');
         $('#saveBtn').show();
 
-        $.get("{{ route('transactions.index') }}" + "/" + id + "/edit", function(data) {
+        $.get("{{ route('presences.index') }}" + "/" + id + "/edit", function(data) {
             $('#modal-title').html("Form edit data");
             $('#id').val(data.id);
-            $('#transaction_date').val(data.transaction_date);
+            $('#presence_date').val(data.presence_date);
             $('#customer_name').val(data.customer_name);
             $('#nama_product').val(data.nama_product);
             $('#price').val(data.price);
@@ -250,10 +248,10 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
         var id = $(this).data('id');
         $('#saveBtn').hide();
 
-        $.get("{{ route('transactions.index') }}" + "/" + id + "/edit", function(data) {
+        $.get("{{ route('presences.index') }}" + "/" + id + "/edit", function(data) {
             $('#modal-title').html("Form show data");
             $('#id').val(data.id);
-            $('#transaction_date').val(data.transaction_date);
+            $('#presence_date').val(data.presence_date);
             $('#customer_name').val(data.customer_name);
             $('#nama_product').val(data.nama_product);
             $('#price').val(data.price);
@@ -264,17 +262,19 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
 
     });
 
-    $("#nama_product").on('change', function() {
-        let nama_product = $("#nama_product").val();
+    $("#customer_name").on('change', function() {
+        let customer_name = $("#customer_name").val();
         $.ajax({
-            url: "{{ route('products.harga') }}",
-            type: "get",
+            url: "{{ route('presences.transactionsData') }}",
+            type: "post",
             data: {
-                nama_product: nama_product
+                customer_name: customer_name
             },
             dataType: 'json',
             success: function(data) {
+                $('#nama_product').val(data.nama_product);
                 $('#price').val(data.price);
+                $('#end_of_membership').val(data.end_of_membership);
             },
             error: function(data) {
                 console.log('Error:', data);
@@ -297,7 +297,7 @@ Toggle column: <a class="toggle-vis" data-column="1">Id</a>
             if (result.isConfirmed) {
                 $.ajax({
                     type: "DELETE",
-                    url: "{{ route('transactions.store') }}" + '/' + id,
+                    url: "{{ route('presences.store') }}" + '/' + id,
                     success: function(data) {
                         $('#datatable').DataTable().ajax.reload();
                     },
