@@ -24,9 +24,9 @@
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="end_of_membership" name="end_of_membership" placeholder="-" disabled>
+                                <input type="text" class="form-control" id="end_of_membership" name="end_of_membership" placeholder="-" readonly>
                                 <label for="end_of_membership">Tanggal Berakhir Member</label>
-                                <!-- <input type="date" class="form-control" id="end_of_membership" name="end_of_membership" placeholder="-" disabled>
+                                <!-- <input type="date" class="form-control" id="end_of_membership" name="end_of_membership" placeholder="-" readonly>
                                 <label for="end_of_membership">Tanggal Berakhir Member </label>
                                 <span class="text-danger error-text end_of_membership_error"></span> -->
                             </div>
@@ -37,7 +37,7 @@
                         <div class="col-md">
                             <div class="form-floating">
                                 <select class="form-select" id="customer_name" name="customer_name">
-                                    <option disabled value="" selected>Choose...</option>
+                                    <option readonly value="" selected>Choose...</option>
                                     @foreach ($customers as $key => $value)
                                     <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
@@ -48,13 +48,13 @@
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="nama_product" name="nama_product" placeholder="-" disabled>
+                                <input type="text" class="form-control" id="nama_product" name="nama_product" placeholder="-" readonly>
                                 <label for="nama_product">Nama Produk</label>
                             </div>
                         </div>
                         <div class="col-md">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="price" name="price" placeholder="-" disabled>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="-" readonly>
                                 <label for="price">Price</label>
                                 <span class="text-danger error-text price_error"></span>
                             </div>
