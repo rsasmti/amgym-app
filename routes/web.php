@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
@@ -28,12 +29,16 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard.home');
+        // return view('dashboard.home');
+        return redirect('/home');
     })->name('dashboard');
 
-    Route::get('home', function () {
-        return view('dashboard.home');
-    });
+    // Route::get('home', function () {
+    //     return view('dashboard.home');
+    // });
+
+    Route::get('home', [DashboardController::class, 'index']);
+
 
     // CRUD Customer
     Route::resource('customers', CustomerController::class);
