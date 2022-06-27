@@ -16,7 +16,7 @@ class CustomerController extends Controller
         if ($request->ajax()) {
 
             $data = DB::table('customers');
-            $data->orderBy('customers.updated_at', 'DESC');
+            // $data->orderBy('customers.updated_at', 'DESC');
 
             return Datatables::of($data)
                 ->addIndexColumn()

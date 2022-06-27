@@ -16,7 +16,7 @@ class TransactionController extends Controller
         if ($request->ajax()) {
 
             $data = DB::table('transactions');
-            $data->orderBy('transactions.updated_at', 'DESC');
+            // $data->orderBy('transactions.updated_at', 'DESC');
 
             return Datatables::of($data)
                 ->addIndexColumn()

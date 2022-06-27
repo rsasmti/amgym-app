@@ -16,7 +16,7 @@ class PresenceController extends Controller
         if ($request->ajax()) {
 
             $data = DB::table('presences');
-            $data->orderBy('presences.updated_at', 'DESC');
+            // $data->orderBy('presences.updated_at', 'DESC');
 
             return Datatables::of($data)
                 ->addIndexColumn()

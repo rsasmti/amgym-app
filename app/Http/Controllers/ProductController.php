@@ -16,7 +16,7 @@ class ProductController extends Controller
         if ($request->ajax()) {
 
             $data = DB::table('products');
-            $data->orderBy('products.updated_at', 'DESC');
+            // $data->orderBy('products.updated_at', 'DESC');
 
             return Datatables::of($data)
                 ->addIndexColumn()
